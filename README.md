@@ -7,5 +7,5 @@ We built the backend using Django 3.2.3. The reason to choose Django is that thi
 
 To run the project, you can either clone the repository or download the .zip fle from Github. As Django is a Python Framework, you need to have Python 3 installed. It is recommended to start a virtual environment with the "python -m venv name" command in the Command Line Interface. after that, you can install the requirements needed using the "pip install -r requirements.txt" command, which will install the needed requirements for the project.
 
-Once you have successfully installed all requirements, you can run the project using the "python manage.py runserver" command, which will start a server in the url "127.0.0.1:8000". You can then access "127.0.0.1:8000/films" to have access to all the films in the database. This project will also be available in Heroku in the near future.
+Once you have successfully installed all requirements, you can run the project using the "python manage.py runserver" command, which will start a server in the url "127.0.0.1:8000". This project will also be available in Heroku in the near future.
 Luis Fernando Laris assigned the Capstone Project and built by Luis Loaeza, Andrés Ayala and Miguel Valdés in the backend and Leonardo Rincón and Julián Vergara in the frontend.
