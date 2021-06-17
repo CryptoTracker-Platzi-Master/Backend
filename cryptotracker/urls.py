@@ -26,4 +26,6 @@ urlpatterns = [
     path('', home),
     path('admin/', admin.site.urls),
     path('api/auth/', include(('auth.urls','auth'))),
+    url(r'^criptos', views.CriptosList.as_view()),
+    path('my-cripto/<int:pk>/', views.CriptosList.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
