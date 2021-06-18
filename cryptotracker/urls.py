@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from cryptos.views import home, CriptosList
+from cryptos.views import home, CriptosList, Portfolio
 from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import url
@@ -28,4 +28,5 @@ urlpatterns = [
     path('api/auth/', include(('auth.urls','auth'))),
     url(r'^criptos', views.CriptosList.as_view()),
     path('my-cripto/<int:pk>/', views.CriptosList.as_view()),
+    path('portfolio/', views.Portfolio.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

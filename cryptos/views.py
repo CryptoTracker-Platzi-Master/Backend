@@ -4,6 +4,9 @@ from django.http import HttpResponse, Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import generics
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -36,3 +39,19 @@ class CriptosList(APIView):
             serializer.save()
             return Response('delete success')
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    def post(self, request):        
+        serializer = CriptosSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class Portfolio(generics.ListAPIView):
+    serializer_class= CriptosUserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=0)
+        return criptos
