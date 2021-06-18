@@ -59,8 +59,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # CORS
     'corsheaders.middleware.CorsMiddleware',
+    # Deployment
     'whitenoise.middleware.WhiteNoiseMiddleware'
+    # 
+    ''
 ]
 
 ROOT_URLCONF = 'cryptotracker.urls'
@@ -162,3 +166,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ]
 }
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_COOKIE_AGE = 7200
