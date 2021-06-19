@@ -63,8 +63,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     # Deployment
     'whitenoise.middleware.WhiteNoiseMiddleware'
-    # 
-    ''
 ]
 
 ROOT_URLCONF = 'cryptotracker.urls'
@@ -94,6 +92,9 @@ WSGI_APPLICATION = 'cryptotracker.wsgi.application'
 DATABASES = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
         'NAME': 'cryptotracker',
         'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
