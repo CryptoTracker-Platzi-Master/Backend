@@ -7,7 +7,7 @@ from rest_framework import generics
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .serializers import SignupSerializer
-from datetime import datetime
+from django.utils.timezone import now
 
 from codes.models import Code
 
@@ -43,7 +43,7 @@ class Login(ObtainAuthToken) :
             current_code = Code.objects.filter(
                 user_id=user.pk,
                 address = request.META.get('REMOTE_ADDR'),
-                expire_date__gte=datetime.now()
+                expire_date__gte=now()
             ).exists()
 
             if not current_code :
@@ -98,7 +98,7 @@ class Validation(generics.CreateAPIView) :
             user_id=request.data.get('user_id'),
             code=request.data.get('code'),
             address = request.META.get('REMOTE_ADDR'),
-            expire_date__gte=datetime.now(),
+            expire_date__gte=now(),
             is_used=False
         ).exists()
 

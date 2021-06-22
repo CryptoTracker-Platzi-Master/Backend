@@ -7,7 +7,7 @@ import random
 class Code(models.Model) :
     id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=6, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_used = models.BooleanField(default=0)
     address = models.CharField(max_length=15, null=True)
     expire_date = models.DateTimeField(blank=True)
