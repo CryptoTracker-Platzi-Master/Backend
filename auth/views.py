@@ -48,7 +48,7 @@ class Login(ObtainAuthToken) :
 
             if not current_code :
                 newcode = Code(
-                    user_id=request.data.get('user_id'),
+                    user_id=user.pk,
                     address=request.META.get('REMOTE_ADDR')
                 )
                 newcode.codegen()
@@ -77,7 +77,7 @@ class Signup(generics.CreateAPIView) :
         token = Token.objects.get_or_create(user=user)
 
         newcode = Code(
-            user_id=request.data.get('user_id'),
+            user_id=user.pk,
             address=request.META.get('REMOTE_ADDR')
         )
         newcode.codegen()
@@ -147,4 +147,5 @@ def send_code(mail='', code='') :
         )
 
     except :
+        print('Error attempting to send code-mail')
         pass
