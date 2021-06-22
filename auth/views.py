@@ -134,7 +134,7 @@ def send_code(mail='', code='') :
         Here is your code:
         {code}
 
-        *Remember: this code has a expiration date
+        *Remember: this code has an expiration date
         """
     
     try :
