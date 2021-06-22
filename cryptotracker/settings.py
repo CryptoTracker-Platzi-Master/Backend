@@ -90,11 +90,14 @@ WSGI_APPLICATION = 'cryptotracker.wsgi.application'
 DATABASES = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heroku_96d05826d25fd5a',
-        'USER': 'b87f92a70daf30',
-        'PASSWORD': '2eddf7b7',
-        'HOST': 'us-cdbr-east-03.cleardb.com',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
+        'NAME': 'cryptotracker',
+        'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
+        'USER': 'admin',
+        'PASSWORD': 'Welcome1!',        
     }
 }
 
