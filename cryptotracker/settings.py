@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'cryptotracker.wsgi.application'
 DATABASES = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cryptotracker',
-        'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
+        'NAME': 'heroku_96d05826d25fd5a',
+        'USER': 'b87f92a70daf30',
+        'PASSWORD': '2eddf7b7',
+        'HOST': 'us-cdbr-east-03.cleardb.com',
         'PORT': '3306',
-        'USER': 'admin',
-        'PASSWORD': 'Welcome1!',
     }
 }
 
@@ -161,3 +161,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ]
 }
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'postmaster@sandbox004e8673e466446c93251a1ce59e9b7a.mailgun.org'
+EMAIL_HOST_PASSWORD = '520fa9055fafbe0d5b21b06c9f74fe98-1f1bd6a9-35cd31a0'
