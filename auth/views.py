@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
 
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .serializers import SignupSerializer
 from datetime import datetime
@@ -52,7 +53,8 @@ class Login(ObtainAuthToken) :
                 )
                 newcode.codegen()
                 newcode.save()
-                newcode.code
+
+                send_code(user.email, newcode.code)
 
             return Response({
                 'user_id': user.pk,
@@ -80,7 +82,8 @@ class Signup(generics.CreateAPIView) :
         )
         newcode.codegen()
         newcode.save()
-        newcode.code
+
+        send_code(user.email, newcode.code)
 
         return Response({
             'user_id': user.pk,
@@ -125,3 +128,23 @@ class Validation(generics.CreateAPIView) :
             return Response({
                 'verified': code_exists
             })
+
+def send_code(mail='', code='') :
+    body = f"""
+        Here is your code:
+        {code}
+
+        *Remember: this code has a expiration date
+        """
+    
+    try :
+        send_mail(
+            'Cryptotracker validation code',
+            body,
+            'Cryptotracker <no-reply@cryprotracker.com>',
+            [mail],
+            fail_silently=False,
+        )
+
+    except :
+        pass
