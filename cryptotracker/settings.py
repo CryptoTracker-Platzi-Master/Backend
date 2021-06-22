@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'cryptos'
+    'codes',
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,9 @@ REST_FRAMEWORK = {
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SESSION_COOKIE_AGE = 7200
+
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'postmaster@sandbox004e8673e466446c93251a1ce59e9b7a.mailgun.org'
+EMAIL_HOST_PASSWORD = '520fa9055fafbe0d5b21b06c9f74fe98-1f1bd6a9-35cd31a0'
