@@ -169,6 +169,7 @@ REST_FRAMEWORK = {
     ]
 }
 
+<<<<<<< HEAD
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
@@ -179,3 +180,9 @@ EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'postmaster@sandbox004e8673e466446c93251a1ce59e9b7a.mailgun.org'
 EMAIL_HOST_PASSWORD = '520fa9055fafbe0d5b21b06c9f74fe98-1f1bd6a9-35cd31a0'
+=======
+EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', '')
+EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
+EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
+EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
+>>>>>>> cbd18e0143aca94a7f21f7c5eb7ecf75b2f31684
