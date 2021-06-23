@@ -45,8 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # External apps
+    'rest_framework.authtoken',
     'rest_framework',
     'corsheaders',
+    'cryptos',
+    'codes',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # CORS
     'corsheaders.middleware.CorsMiddleware',
+    # Deployment
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
@@ -88,11 +93,14 @@ WSGI_APPLICATION = 'cryptotracker.wsgi.application'
 DATABASES = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
         'NAME': 'cryptotracker',
         'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
         'USER': 'admin',
-        'PASSWORD': 'Welcome1!',
+        'PASSWORD': 'Welcome1!',        
     }
 }
 
@@ -150,3 +158,25 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from .settings_production import *
+
+# REST Auth settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
+
+EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', '')
+EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
+EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
+EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
+
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_COOKIE_AGE = 7200
+

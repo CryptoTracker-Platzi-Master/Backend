@@ -1,3 +1,4 @@
 from django.contrib import admin
+from cryptos.models import Criptos
 
-# Register your models here.
+admin.site.register(Criptos)
