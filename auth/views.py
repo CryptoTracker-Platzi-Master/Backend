@@ -141,7 +141,7 @@ def send_code(mail='', code='') :
         send_mail(
             'Cryptotracker validation code',
             body,
-            'Cryptotracker <no-reply@cryprotracker.com>',
+            'Cryptotracker <no-reply@cryptotracker.com>',
             [mail],
             fail_silently=False,
         )
