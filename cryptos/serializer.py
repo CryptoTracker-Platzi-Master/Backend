@@ -18,7 +18,7 @@ class CriptosUserSerializer(serializers.ModelSerializer):
         model = Criptos
         fields = '__all__'
     
-    def to_representation(self,instance):
+    def to_representation(self, instance):
 
         return{
             'username': instance.user_fk.username,
