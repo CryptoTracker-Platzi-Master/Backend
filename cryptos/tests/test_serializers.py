@@ -2,6 +2,7 @@ import unittest
 from cryptos.serializer import CriptosUserSerializer
 from cryptos.models import Criptos
 from datetime import date
+from django.contrib.auth.models import User
 
 class MyTestCase(unittest.TestCase):
 
@@ -10,18 +11,20 @@ class MyTestCase(unittest.TestCase):
         self.criptouser_attributes = {
             'id_c': 2,
             'name': 'Platzicoin',
+            'symbol': 'PZE',
             'purchase_price': 12.3,
             'take_profit': 100.2,
             'stop_loss': 8.2,
             'cantity': 1,
             'able': 0,
             'date_purchase': date.today(),
-            'user_fk': 3
+            'user_fk': 1
         }
 
         self.criptouser_data = {
             'id_c': 1,
             'name': 'Mexicoin',
+            'symbol': 'MXE',
             'purchase_price': 11.3,
             'take_profit': 220.2,
             'stop_loss': 5.2,
