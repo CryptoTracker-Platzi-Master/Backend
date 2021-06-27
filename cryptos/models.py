@@ -5,7 +5,8 @@ today = date.today()
 # Create your models here.
 class Criptos(models.Model):
     id_c = models.AutoField(primary_key=True)    
-    name = models.CharField(max_length=200)    
+    name = models.CharField(max_length=200)
+    symbol = models.CharField(max_length=200)
     purchase_price = models.FloatField()
     take_profit = models.FloatField()
     stop_loss = models.FloatField()
