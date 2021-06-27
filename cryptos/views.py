@@ -53,5 +53,5 @@ class Portfolio(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=0)
+        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
         return criptos
