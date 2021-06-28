@@ -158,16 +158,16 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from .settings_production import *
-
-# REST Auth settings
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
-    ]
-}
+#
+# # REST Auth settings
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication'
+#     ],
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated'
+#     ]
+# }
 
 EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', '')
 EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')

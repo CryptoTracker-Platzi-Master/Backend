@@ -16,7 +16,7 @@ class MyTestCase(unittest.TestCase):
             'cantity': 1,
             'able': 0,
             'date_purchase': date.today(),
-            'user_fk': 3
+            'user_fk': 1
         }
 
         self.criptouser_data = {
