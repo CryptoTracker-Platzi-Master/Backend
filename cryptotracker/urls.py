@@ -19,14 +19,17 @@ from cryptos.views import home, CriptosList, Portfolio
 from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import url
-from cryptos import views
+from cryptos.views import *
+from codes.views import CodeList
 
 
 urlpatterns = [
     path('', home),
     path('admin/', admin.site.urls),
     path('api/auth/', include(('auth.urls','auth'))),
-    url(r'^criptos', views.CriptosList.as_view()),#insert
-    path('my-cripto/<int:pk>/', views.CriptosList.as_view()),
-    path('portfolio/', views.Portfolio.as_view()),#just get
+    url(r'^criptos', CriptosList.as_view()),#insert
+    path('my-cripto/<int:pk>/', CriptosList.as_view()),
+    path('portfolio/', Portfolio.as_view()),#just get
+    path('code/', CodeList.as_view()),    
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

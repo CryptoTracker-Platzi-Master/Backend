@@ -23,6 +23,7 @@ class CriptosUserSerializer(serializers.ModelSerializer):
         return{
             'username': instance.user_fk.username,
             'name': instance.name,
+            'symbol': instance.symbol,
             'purchase_price': instance.purchase_price,
             'take_profit': instance.take_profit,
             'stop_loss': instance.stop_loss,
