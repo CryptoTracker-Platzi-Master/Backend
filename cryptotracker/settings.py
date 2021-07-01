@@ -31,8 +31,12 @@ DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "https://cryptotracker-master.netlify.app/",
+# ]
 
+CORS_ALLOW_CREDENTIALS = True 
 
 # Application definition
 
@@ -64,6 +68,9 @@ MIDDLEWARE = [
     # Deployment
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'cryptotracker.urls'
 
@@ -99,7 +106,7 @@ DATABASES = {
         'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
         'USER': 'admin',
-        'PASSWORD': 'Welcome1!',
+        'PASSWORD': 'Welcome1!',        
     }
 }
 
