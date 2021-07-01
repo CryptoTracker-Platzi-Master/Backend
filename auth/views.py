@@ -11,6 +11,8 @@ from django.utils.timezone import now
 
 from codes.models import Code
 
+import hashlib
+
 class Login(ObtainAuthToken) :
     permission_classes = (AllowAny,)
 
@@ -20,9 +22,11 @@ class Login(ObtainAuthToken) :
         user = serializer.validated_data['user']
         token = Token.objects.get_or_create(user=user)
 
+        agent = hash_agent(request.META.get('HTTP_USER_AGENT'))
+
         verified = Code.objects.filter(
             user_id=user.pk,
-            address=request.META.get('REMOTE_ADDR'),
+            agent=agent,
             is_used=True
         ).exists()
 
@@ -42,14 +46,14 @@ class Login(ObtainAuthToken) :
         else :
             current_code = Code.objects.filter(
                 user_id=user.pk,
-                address = request.META.get('REMOTE_ADDR'),
+                agent=agent,
                 expire_date__gte=now()
             ).exists()
 
             if not current_code :
                 newcode = Code(
                     user_id=user.pk,
-                    address=request.META.get('REMOTE_ADDR')
+                    agent=agent
                 )
                 newcode.codegen()
                 newcode.save()
@@ -76,9 +80,11 @@ class Signup(generics.CreateAPIView) :
         user = self.perform_create(serializer)
         token = Token.objects.get_or_create(user=user)
 
+        agent = hash_agent(request.META.get('HTTP_USER_AGENT'))
+
         newcode = Code(
             user_id=user.pk,
-            address=request.META.get('REMOTE_ADDR')
+            agent=agent
         )
         newcode.codegen()
         newcode.save()
@@ -93,11 +99,12 @@ class Signup(generics.CreateAPIView) :
 
 class Validation(generics.CreateAPIView) :
     def post(self, request) :
+        agent = hash_agent(request.META.get('HTTP_USER_AGENT'))
         
         code_exists = Code.objects.filter(
             user_id=request.data.get('user_id'),
             code=request.data.get('code'),
-            address = request.META.get('REMOTE_ADDR'),
+            agent=agent,
             expire_date__gte=now(),
             is_used=False
         ).exists()
@@ -149,3 +156,6 @@ def send_code(mail='', code='') :
     except :
         print('Error attempting to send code-mail')
         pass
+
+def hash_agent(string='') :
+    return hashlib.md5(bytes(string, encoding='utf8')).hexdigest()
