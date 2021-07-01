@@ -59,7 +59,7 @@ class Login(ObtainAuthToken) :
             return Response({
                 'user_id': user.pk,
                 'token': token[0].key,
-                'verified': True
+                'verified': False
             })
 
 class Signup(generics.CreateAPIView) :
