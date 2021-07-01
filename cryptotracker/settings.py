@@ -38,6 +38,15 @@ ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOW_CREDENTIALS = True 
 
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Authorization',
+    'Content-Type',
+    'Origin',
+    'User-agent',
+    'Access-Control-Allow-Origin',
+    'Enctype'
+]
 # Application definition
 
 INSTALLED_APPS = [
