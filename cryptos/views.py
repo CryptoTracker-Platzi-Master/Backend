@@ -65,7 +65,5 @@ class AlgorithPortfolio(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
-        # criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
-        
         return criptos
 
