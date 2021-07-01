@@ -29,7 +29,9 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-nfj)t=bn-$c@ke#69jzxl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
-
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -177,5 +179,3 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SESSION_COOKIE_AGE = 7200
 
-CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ["*"]
