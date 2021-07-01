@@ -9,7 +9,7 @@ class Code(models.Model) :
     code = models.CharField(max_length=6, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_used = models.BooleanField(default=0)
-    address = models.CharField(max_length=15, null=True)
+    agent = models.CharField(max_length=35, null=True)
     expire_date = models.DateTimeField(blank=True)
 
     class Meta:
