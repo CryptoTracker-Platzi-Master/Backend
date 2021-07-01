@@ -11,6 +11,7 @@ class Criptos(models.Model):
     take_profit = models.FloatField()
     stop_loss = models.FloatField()
     cantity = models.FloatField()
+    amount_invested = models.FloatField()
     able = models.IntegerField(default=1)
     date_purchase = models.DateField(default=today)
     user_fk = models.ForeignKey(User, on_delete=models.PROTECT)
