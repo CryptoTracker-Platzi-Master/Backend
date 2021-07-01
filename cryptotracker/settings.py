@@ -29,8 +29,14 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-nfj)t=bn-$c@ke#69jzxl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
+ALLOWED_HOSTS = ["*"]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://cryptotracker-master.netlify.app/",
+]
 
+CORS_ALLOW_CREDENTIALS = True 
 
 # Application definition
 
@@ -97,7 +103,7 @@ DATABASES = {
         'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
         'USER': 'admin',
-        'PASSWORD': 'Welcome1!',
+        'PASSWORD': 'Welcome1!',        
     }
 }
 
@@ -177,5 +183,3 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SESSION_COOKIE_AGE = 7200
 
-CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ["*"]
