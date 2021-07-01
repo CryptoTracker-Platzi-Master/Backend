@@ -96,11 +96,16 @@ DATABASES = {
         'OPTIONS': {
             'sql_mode': 'traditional',
         },
+        # 'NAME': 'cryptotracker',
+        # 'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
+        # 'PORT': '3306',
+        # 'USER': 'admin',
+        # 'PASSWORD': 'Welcome1!',
         'NAME': 'cryptotracker',
-        'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '3306',
-        'USER': 'admin',
-        'PASSWORD': 'Welcome1!',        
+        'USER': 'root',
+        'PASSWORD': '',
     }
 }
 
