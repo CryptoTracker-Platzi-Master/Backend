@@ -21,11 +21,7 @@ class CriptosUserSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
 
         return{
-<<<<<<< HEAD
             'id_c': instance.id_c,
-=======
-            'id': instance.id_c,
->>>>>>> 21a3526ddd994389c71c63c0d30bab3b66979da7
             'username': instance.user_fk.username,
             'name': instance.name,
             'symbol': instance.symbol,
@@ -48,8 +44,6 @@ class AlgorithmsCriptosUserSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         criptos = Criptos.objects.aggregate(total_purchase=Sum('purchase_price'))
         return criptos
-        # return{            
-        #     'purchase_price': criptos
-        # }
+
 
     
