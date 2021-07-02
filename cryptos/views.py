@@ -1,4 +1,6 @@
-from cryptos.serializer import CriptosSerializer, CriptosUserSerializer
+from datetime import date
+from django.db.models.aggregates import Avg ,Sum
+from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, AlgorithmsCriptosUserSerializer
 from cryptos.models import Criptos
 from django.http import HttpResponse, Http404
 from rest_framework.views import APIView
@@ -7,6 +9,7 @@ from rest_framework import status
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from rest_framework import viewsets
 
 
 def home(request):
@@ -55,3 +58,12 @@ class Portfolio(generics.ListAPIView):
         user = self.request.user
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
         return criptos
+
+class AlgorithPortfolio(generics.ListAPIView):
+    serializer_class= AlgorithmsCriptosUserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
+        return criptos
+
