@@ -9,3 +9,116 @@ To run the project, you can either clone the repository or download the .zip fil
 
 Once you have successfully installed all requirements, you can run the project using the "python manage.py runserver" command, which will start a server in the url "127.0.0.1:8000". This project is also available at https://cryptotrackerapi.herokuapp.com/ (although it has not et been completed).
 Luis Fernando Laris assigned the Capstone Project and was built by Luis Loaeza, Andrés Ayala and Miguel Valdés in the backend and Leonardo Rincón and Julián Vergara in the frontend.
+
+
+## Acknowledgements
+
+ - [Luis Fernando Laris](luis.laris@platzi.com)
+ 
+  
+## API Reference
+
+https://cryptotrackerapi.herokuapp.com/
+
+#### SIgnUp
+
+``` SignUp
+  Post  /api/auth/signup/
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api/auth/signup/` | `Json` | **Required**. Endpoint to register new user|
+
+#### Login
+
+```https
+  Post /api/auth/login/
+```
+
+| Header | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+|`api/auth/login/`| `Json` | **Required**. Endpoint for login|
+
+#### Add criptos to portfolio
+
+```https
+  Post /criptos/
+```
+
+| Header | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `Authorization` | `Token` | **Required**. Endpoint where you will insert a cryptocurrency in the authenticated user's portfolio
+
+
+#### Get all portfolio
+
+```http
+  GET /portfolio/
+```
+
+| Header | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `Authorization` | `Token` | **Required**. Endpoint where get all criptos acquired for loged user|
+
+#### Get a single cripto
+
+```http
+  GET /my-cripto/<cripto_id>
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+
+#### Get all invested
+
+```http
+  GET /invested/
+```
+
+| Header | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `Authorization` | `Token` | **Required**. Endpoint where get all invested in the portfolio|
+
+  
+## Authors
+
+Backend
+
+- [@miguelalf](https://github.com/miguelalf)
+- [@Loaezo](https://github.com/Loaezo)
+- [@cexperto](https://github.com/cexperto)
+
+Fronted
+
+- [@LeoRincon](https://github.com/LeoRincon)
+- [@jtomasvc](https://github.com/jtomasvc)
+
+  
+## Deployment
+
+To deploy this project:
+
+clone this repo
+
+Install python3+
+
+
+```bash
+run
+py -m venv <name venv>
+py install -r requirements.txt
+py manage.py runserver  
+
+ 
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+  
+## Tech Stack
+
+**Client:** JavaScript, React, SCSS, HTML 
+
+**Server:** Python, Django, MySql, AWS
