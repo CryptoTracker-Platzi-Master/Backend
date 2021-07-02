@@ -31,10 +31,10 @@ DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "https://cryptotracker-master.netlify.app/",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://cryptotracker-master.netlify.app/",
+]
 
 CORS_ALLOW_CREDENTIALS = True 
 
@@ -111,16 +111,11 @@ DATABASES = {
         'OPTIONS': {
             'sql_mode': 'traditional',
         },
-        # 'NAME': 'cryptotracker',
-        # 'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
-        # 'PORT': '3306',
-        # 'USER': 'admin',
-        # 'PASSWORD': 'Welcome1!',
         'NAME': 'cryptotracker',
-        'HOST': 'localhost',
+        'HOST': 'cryptotracker.c1lrgmovngsy.us-east-2.rds.amazonaws.com',
         'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'admin',
+        'PASSWORD': 'Welcome1!',
     }
 }
 
