@@ -13,7 +13,7 @@ Luis Fernando Laris assigned the Capstone Project and was built by Luis Loaeza, 
 
 ## Acknowledgements
 
- - [Luis Fernando Laris](luis.laris@platzi.com)
+  - [@larispardo](https://github.com/larispardo)
  
   
 ## API Reference
