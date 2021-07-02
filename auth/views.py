@@ -139,9 +139,10 @@ class Validation(generics.CreateAPIView) :
 def send_code(mail='', code='') :
     body = f"""
         Here is your code:
+        
         {code}
 
-        *Remember: this code has an expiration date
+        *Remember: this code can be used within one hour
         """
     
     try :
