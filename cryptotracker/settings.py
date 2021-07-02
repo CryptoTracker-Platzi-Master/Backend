@@ -36,8 +36,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://cryptotracker-master.netlify.app/",
 ]
 
-CORS_ALLOW_CREDENTIALS = True 
-
 CORS_ALLOW_HEADERS = [
     'Accept',
     'Authorization',
@@ -77,8 +75,6 @@ MIDDLEWARE = [
     # Deployment
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 
 ROOT_URLCONF = 'cryptotracker.urls'
@@ -189,9 +185,6 @@ EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
 EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
 EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
 
-
-
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SESSION_COOKIE_AGE = 7200
-
