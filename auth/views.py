@@ -22,7 +22,7 @@ class Login(ObtainAuthToken) :
         user = serializer.validated_data['user']
         token = Token.objects.get_or_create(user=user)
 
-        agent = hash_agent(request.META.get('HTTP_USER_AGENT'))
+        agent = hash_agent(user.username + request.META.get('HTTP_USER_AGENT'))
 
         verified = Code.objects.filter(
             user_id=user.pk,
@@ -80,7 +80,7 @@ class Signup(generics.CreateAPIView) :
         user = self.perform_create(serializer)
         token = Token.objects.get_or_create(user=user)
 
-        agent = hash_agent(request.META.get('HTTP_USER_AGENT'))
+        agent = hash_agent(user.username + request.META.get('HTTP_USER_AGENT'))
 
         newcode = Code(
             user_id=user.pk,
@@ -99,7 +99,9 @@ class Signup(generics.CreateAPIView) :
 
 class Validation(generics.CreateAPIView) :
     def post(self, request) :
-        agent = hash_agent(request.META.get('HTTP_USER_AGENT'))
+        user = User.objects.get(pk=request.data.get('user_id'))
+
+        agent = hash_agent(user.username + request.META.get('HTTP_USER_AGENT'))
         
         code_exists = Code.objects.filter(
             user_id=request.data.get('user_id'),
@@ -117,8 +119,6 @@ class Validation(generics.CreateAPIView) :
 
             code.is_used = True
             code.save()
-
-            user = User.objects.get(pk=request.data.get('user_id'))
 
             return Response({
                 'user_id': user.pk,

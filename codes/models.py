@@ -27,7 +27,7 @@ class Code(models.Model) :
             strcode += str(random.choice(nums))
         
         date = datetime.now()
-        delta = timedelta(hours=1)
+        delta = timedelta(minutes=10)
         
         self.is_used = 0
         self.code = strcode
