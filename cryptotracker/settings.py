@@ -31,7 +31,10 @@ DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://cryptotracker-master.netlify.app",
+]
 
 CORS_ALLOW_HEADERS = [
     'Accept',
@@ -72,7 +75,6 @@ MIDDLEWARE = [
     # Deployment
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
-
 
 ROOT_URLCONF = 'cryptotracker.urls'
 
