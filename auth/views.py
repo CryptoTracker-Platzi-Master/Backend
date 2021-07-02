@@ -142,7 +142,7 @@ def send_code(mail='', code='') :
         
         {code}
 
-        *Remember: this code can be used within one hour
+        *Remember: this code is only valid for the next 15 minutes
         """
     
     try :
