@@ -53,7 +53,7 @@ class CriptosList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
 
 class Portfolio(generics.ListAPIView):
     serializer_class= CriptosUserSerializer
@@ -63,30 +63,6 @@ class Portfolio(generics.ListAPIView):
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
         return criptos
 
-class AlgorithPortfolio(generics.ListAPIView):
-    serializer_class= InvestedSerializer
-    # serializer_class= CriptosUserSerializer
-
-    def get_queryset(self):
-        user = self.request.user
-        # criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)[:1]
-        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
-        cr = len(criptos)
-        # # print(len(criptos))
-        ls = []
-        for i in range(cr):
-            ls.append(criptos[i].purchase_price)
-        s= 0
-        for i in ls:
-            s += i
-        print(s)
-        
-        # print(criptos[1].purchase_price)
-        
-        return criptos
-
-
-
 class ProfitPortfolio(generics.ListAPIView):
     serializer_class = ProfitSerializar
 
@@ -94,4 +70,21 @@ class ProfitPortfolio(generics.ListAPIView):
         user = self.request.user
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
         return criptos
+
+class AlgorithPortfolio(generics.ListAPIView):
+    serializer_class= InvestedSerializer
+
+    def get_queryset(self):
+        s = 0
+        user = self.request.user
+        criptos = Criptos.objects.filter(user_fk_id=user, able=1)
+        cr = len(criptos)
+        ls = []
+        for i in range(cr):
+            ls.append(criptos[i].purchase_price)
+        for i in ls:
+            s += i
+        return self.s
+
+
 
