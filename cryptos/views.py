@@ -68,9 +68,9 @@ class AlgorithPortfolio(generics.ListAPIView):
     # serializer_class= CriptosUserSerializer
 
     def get_queryset(self):
-        user = self.request.user
-        # criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)[:1]
-        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
+        user = self.request.user        
+        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)[:1]
+        # criptos = Criptos.objects.filter(user_fk_id=user, able=1)
         cr = len(criptos)
         # # print(len(criptos))
         ls = []
@@ -79,7 +79,7 @@ class AlgorithPortfolio(generics.ListAPIView):
         s= 0
         for i in ls:
             s += i
-        print(s)
+        # print(s)
         
         # print(criptos[1].purchase_price)
         
@@ -90,8 +90,8 @@ class AlgorithPortfolio(generics.ListAPIView):
 class ProfitPortfolio(generics.ListAPIView):
     serializer_class = ProfitSerializar
 
-    def get_queryset(self):
-        user = self.request.user
+    def get_queryset(self):        
+        # user = self.request.user
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
         return criptos
 
