@@ -1,6 +1,9 @@
 from datetime import date
 from django.db.models.aggregates import Avg ,Sum
-from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, AlgorithmsCriptosUserSerializer
+from django.db.models.query import QuerySet
+from rest_framework import serializers
+from rest_framework.serializers import Serializer
+from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, InvestedSerializer, ProfitSerializar
 from cryptos.models import Criptos
 from django.http import HttpResponse, Http404
 from rest_framework.views import APIView
@@ -10,6 +13,7 @@ from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rest_framework import viewsets
+from django.http import JsonResponse
 
 
 def home(request):
@@ -60,7 +64,31 @@ class Portfolio(generics.ListAPIView):
         return criptos
 
 class AlgorithPortfolio(generics.ListAPIView):
-    serializer_class= AlgorithmsCriptosUserSerializer
+    serializer_class= InvestedSerializer
+    # serializer_class= CriptosUserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        # criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)[:1]
+        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
+        cr = len(criptos)
+        # # print(len(criptos))
+        ls = []
+        for i in range(cr):
+            ls.append(criptos[i].purchase_price)
+        s= 0
+        for i in ls:
+            s += i
+        print(s)
+        
+        # print(criptos[1].purchase_price)
+        
+        return criptos
+
+
+
+class ProfitPortfolio(generics.ListAPIView):
+    serializer_class = ProfitSerializar
 
     def get_queryset(self):
         user = self.request.user
