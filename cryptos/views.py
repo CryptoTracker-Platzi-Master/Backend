@@ -3,7 +3,7 @@ from django.db.models.aggregates import Avg ,Sum
 from django.db.models.query import QuerySet
 from rest_framework import serializers
 from rest_framework.serializers import Serializer
-from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, InvestedSerializer, ProfitSerializar
+from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, PurchseProfitSerializar
 from cryptos.models import Criptos
 from django.http import HttpResponse, Http404
 from rest_framework.views import APIView
@@ -63,28 +63,25 @@ class Portfolio(generics.ListAPIView):
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
         return criptos
 
-class ProfitPortfolio(generics.ListAPIView):
-    serializer_class = ProfitSerializar
+# class AlgorithPortfolio(generics.ListAPIView):
+#     serializer_class= PurchseProfitSerializar
+#     # serializer_class= CriptosUserSerializer
 
-    def get_queryset(self):
-        user = self.request.user
+#     def get_queryset(self):
+#         user = self.request.user        
+        
+#         return criptos
+
+
+
+class ProfitPortfolio(generics.ListAPIView):
+    serializer_class = PurchseProfitSerializar
+
+    def get_queryset(self):        
+        
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
+        
+        # return HttpResponse(data, content_type="application/json")
         return criptos
 
-class AlgorithPortfolio(generics.ListAPIView):
-    serializer_class= InvestedSerializer
-
-    def get_queryset(self):
-        s = 0
-        user = self.request.user
-        criptos = Criptos.objects.filter(user_fk_id=user, able=1)
-        cr = len(criptos)
-        ls = []
-        for i in range(cr):
-            ls.append(criptos[i].purchase_price)
-        for i in ls:
-            s += i
-        return self.s
-
-
-
+# queryset -> json , retor
