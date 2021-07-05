@@ -75,7 +75,7 @@ https://cryptotrackerapi.herokuapp.com/
 #### Get all invested
 
 ```http
-  GET /invested/
+  GET /balance/
 ```
 
 | Header | Type     | Description                |
