@@ -40,7 +40,7 @@ class CriptosList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk, format=None):
-        cripto = self.get_queryset().filter(id_c=pk).first()
+        cripto = self.get_object(pk).first()
         if cripto:
             cripto.able = 0
             cripto.save()
