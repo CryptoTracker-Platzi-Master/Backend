@@ -49,8 +49,8 @@ class PurchseProfitSerializar(serializers.ModelSerializer):
         
         # return criptos
         return {            
-            'purchase_price': s_pur_price,
-            'take_profit': s_take_profit,
+            'total invertido': s_pur_price,#multiplicacion entre cantidad y precio compra
+            'take_profit': s_take_profit,# 
             'excepted_earnings':total_profit,
         }
         

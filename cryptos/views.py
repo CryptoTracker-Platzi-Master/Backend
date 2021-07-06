@@ -45,7 +45,7 @@ class CriptosList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response('delete success')
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(serializers.errors,status=status.HTTP_204_NO_CONTENT)
     
     def post(self, request):        
         serializer = CriptosSerializer(data=request.data)

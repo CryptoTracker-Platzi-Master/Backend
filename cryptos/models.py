@@ -13,7 +13,7 @@ class Criptos(models.Model):
     cantity = models.FloatField()
     amount_invested = models.FloatField()
     able = models.IntegerField(default=1)
-    date_purchase = models.DateField(default=today)
+    date_purchase = models.DateField("Creation date", auto_now=False, auto_now_add=True)
     user_fk = models.ForeignKey(User, on_delete=models.PROTECT)
 
     class Meta:
@@ -23,3 +23,4 @@ class Criptos(models.Model):
 
     def __str__(self):
         return self.name
+
