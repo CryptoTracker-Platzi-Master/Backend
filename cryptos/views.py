@@ -40,12 +40,17 @@ class CriptosList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk, format=None):
-        cripto = self.get_object(pk)
-        serializer = CriptosSerializer(cripto, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response('delete success')
-        return Response(serializers.errors,status=status.HTTP_204_NO_CONTENT)
+        cripto = self.get_queryset().filter(id_c=pk).first()
+        if cripto:
+            cripto.able = 0
+            cripto.save()
+            return Response(
+                {
+                    "message": "delete success"
+                },
+                status=status.HTTP_200_OK
+            )
+        return Response({"error": "The Activity not found"}, status=status.HTTP_404_NOT_FOUND)
     
     def post(self, request):        
         serializer = CriptosSerializer(data=request.data)
