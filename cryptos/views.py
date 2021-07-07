@@ -33,8 +33,8 @@ class CriptosList(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        c=int(request.data['cantity'])
-        p=int(request.data['purchase_price'])
+        c=float(request.data['cantity'])
+        p=float(request.data['purchase_price'])
         total_invested = c*p
         data_custom = request.data
         data_custom['able'] = 1
@@ -60,8 +60,8 @@ class CriptosList(APIView):
         return Response({"error": "The Activity not found"}, status=status.HTTP_404_NOT_FOUND)
     
     def post(self, request):
-        c=int(request.data['cantity'])
-        p=int(request.data['purchase_price'])
+        c=float(request.data['cantity'])
+        p=float(request.data['purchase_price'])
         total_invested = c*p
         data_custom = request.data
         data_custom['total_invested'] = total_invested
