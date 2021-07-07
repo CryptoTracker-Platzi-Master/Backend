@@ -33,6 +33,12 @@ class CriptosList(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
+        c=request.data['cantity']
+        p=request.data['purchase_price']
+        total_invested = c*p
+        data_custom = request.data
+        data_custom['able'] = 1
+        data_custom['total_invested'] = total_invested
         cripto = self.get_object(pk)
         serializer = CriptosSerializer(cripto, data=request.data)
         if serializer.is_valid():

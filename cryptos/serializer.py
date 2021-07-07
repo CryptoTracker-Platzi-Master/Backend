@@ -33,7 +33,7 @@ class CriptosUserSerializer(serializers.ModelSerializer):
             'take_profit': instance.take_profit,
             'stop_loss': instance.stop_loss,
             'cantity': instance.cantity,
-            'invested': total_invested            
+            'total_invested': total_invested            
         }
 
 class PurchaseProfitSerializar(serializers.ModelSerializer):
