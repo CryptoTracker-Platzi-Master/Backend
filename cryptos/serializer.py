@@ -21,7 +21,8 @@ class CriptosUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
     
     def to_representation(self, instance):
-
+        total_invested = instance.purchase_price*instance.cantity
+        
         return{
             'id_c': instance.id_c,
             'username': instance.user_fk.username,
@@ -32,10 +33,11 @@ class CriptosUserSerializer(serializers.ModelSerializer):
             'take_profit': instance.take_profit,
             'stop_loss': instance.stop_loss,
             'cantity': instance.cantity,
+            'invested': total_invested            
         }
 
-class PurchseProfitSerializar(serializers.ModelSerializer):
-
+class PurchaseProfitSerializar(serializers.ModelSerializer):
+    
     
     class Meta:
         model = Criptos
@@ -43,14 +45,8 @@ class PurchseProfitSerializar(serializers.ModelSerializer):
     
 
     def to_representation(self, instance):
-        s_pur_price = Criptos.objects.aggregate(purchase_price=Sum('purchase_price'))
-        s_take_profit = Criptos.objects.aggregate(total_profit=Sum('take_profit'))
-        total_profit = Criptos.objects.aggregate(expected_earnings=Sum(F('take_profit')-F('purchase_price')))
-        
-        # return criptos
-        return {            
-            'total invertido': s_pur_price,#multiplicacion entre cantidad y precio compra
-            'take_profit': s_take_profit,# 
-            'excepted_earnings':total_profit,
+        total_invested = Criptos.objects.aggregate(total_invested=Sum('total_invested'))
+        return {
+            'total_invested': total_invested
         }
         

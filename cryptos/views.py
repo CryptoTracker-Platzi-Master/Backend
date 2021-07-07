@@ -1,9 +1,10 @@
 from datetime import date
 from django.db.models.aggregates import Avg ,Sum
 from django.db.models.query import QuerySet
+from django.utils.functional import Promise
 from rest_framework import serializers
 from rest_framework.serializers import Serializer
-from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, PurchseProfitSerializar
+from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, PurchaseProfitSerializar
 from cryptos.models import Criptos
 from django.http import HttpResponse, Http404
 from rest_framework.views import APIView
@@ -52,8 +53,14 @@ class CriptosList(APIView):
             )
         return Response({"error": "The Activity not found"}, status=status.HTTP_404_NOT_FOUND)
     
-    def post(self, request):        
-        serializer = CriptosSerializer(data=request.data)
+    def post(self, request):
+        c=request.data['cantity']
+        p=request.data['purchase_price']
+        total_invested = c*p
+        data_custom = request.data
+        data_custom['total_invested'] = total_invested
+        # print(data_custom)
+        serializer = CriptosSerializer(data=request.data)        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -65,28 +72,15 @@ class Portfolio(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1)
+        criptos = Criptos.objects.filter(user_fk_id=user, able=1)
         return criptos
-
-# class AlgorithPortfolio(generics.ListAPIView):
-#     serializer_class= PurchseProfitSerializar
-#     # serializer_class= CriptosUserSerializer
-
-#     def get_queryset(self):
-#         user = self.request.user        
-        
-#         return criptos
 
 
 
 class ProfitPortfolio(generics.ListAPIView):
-    serializer_class = PurchseProfitSerializar
+    serializer_class = PurchaseProfitSerializar
 
-    def get_queryset(self):        
-        
+    def get_queryset(self):
         criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
         
-        # return HttpResponse(data, content_type="application/json")
         return criptos
-
-# queryset -> json , retor
