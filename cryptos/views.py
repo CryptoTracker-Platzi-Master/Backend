@@ -87,6 +87,7 @@ class ProfitPortfolio(generics.ListAPIView):
     serializer_class = PurchaseProfitSerializar
 
     def get_queryset(self):
-        criptos = Criptos.objects.filter(user_fk_id=self.request.user, able=1).order_by('id_c')[:1]
+        user = self.request.user
+        criptos = Criptos.objects.filter(user_fk_id=user)[:1]
         
         return criptos

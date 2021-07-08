@@ -45,7 +45,7 @@ class PurchaseProfitSerializar(serializers.ModelSerializer):
     
 
     def to_representation(self, instance):
-        total_invested = Criptos.objects.aggregate(total_invested=Sum('total_invested'))
+        total_invested = Criptos.objects.filter(able=1).aggregate(total_invested=Sum('total_invested'))
         return {
             'total_invested': total_invested
         }
