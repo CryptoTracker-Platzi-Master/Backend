@@ -1,10 +1,12 @@
 from datetime import date
 from django.db.models.aggregates import Avg ,Sum
+from django.db.models import Case ,When
+from django.db.models.fields import DecimalField
 from django.db.models.query import QuerySet
 from django.utils.functional import Promise
 from rest_framework import serializers
 from rest_framework.serializers import Serializer
-from cryptos.serializer import CriptosSerializer, CriptosUserSerializer, PurchaseProfitSerializar
+from cryptos.serializer import CriptosSerializer, CriptosUserSerializer
 from cryptos.models import Criptos
 from django.http import HttpResponse, Http404
 from rest_framework.views import APIView
@@ -73,21 +75,17 @@ class CriptosList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Portfolio(generics.ListAPIView):
+class Portfolio(generics.RetrieveAPIView):
     serializer_class= CriptosUserSerializer
-
-    def get_queryset(self):
+    # def get_queryset(self):
+    # def retrieve(self, request, *args, **kwargs):
+    def retrieve(self,request):
         user = self.request.user
         criptos = Criptos.objects.filter(user_fk_id=user, able=1)
-        return criptos
-
-
-
-class ProfitPortfolio(generics.ListAPIView):
-    serializer_class = PurchaseProfitSerializar
-
-    def get_queryset(self):
-        user = self.request.user
-        criptos = Criptos.objects.filter(user_fk_id=user)[:1]
+        suma_total_invested = Criptos.objects.filter(user_fk=user, able=1).aggregate(Sum('total_invested'))
         
-        return criptos
+        data = {
+            "sum": suma_total_invested,            
+            "criptos" : criptos.values()
+        }
+        return Response(data)
